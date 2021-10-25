@@ -2,6 +2,7 @@
  * 日志记录配置
  */
 import log4js from 'log4js'
+
 const enum Levels {
   trace = 'trace',
   debug = 'debug',
