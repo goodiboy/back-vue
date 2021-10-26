@@ -19,11 +19,11 @@ log4js.configure({
     console: { type: 'console' },
     info: {
       type: 'file', // 文件
-      filename: 'src/logs/info.log'
+      filename: 'logs/info.log'
     },
     error: {
       type: 'dateFile', //日期文件
-      filename: 'src/logs/error', // pattern已经带有log后缀
+      filename: 'logs/error', // pattern已经带有log后缀
       pattern: 'yyyy-MM-dd.log',
       alwaysIncludePattern: true // 设置文件名 filename + pattern
     }
