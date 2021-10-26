@@ -1,16 +1,17 @@
 import path from 'path'
 import webpackNodeExternals from 'webpack-node-externals'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import { APP_PATH, DIST_PATH } from './utils'
+import webpack from 'webpack'
 
 export default {
   target: 'node',
-  mode: 'production',
   entry: {
-    server: path.join(__dirname, '../src/app.ts')
+    server: path.join(APP_PATH, 'app.ts')
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(DIST_PATH)
   },
   module: {
     rules: [
@@ -21,11 +22,21 @@ export default {
       }
     ]
   },
+  // 排除不会使用的模块
   externals: [webpackNodeExternals()],
   plugins: [
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // eslint-disable-next-line
     // @ts-ignore
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV:
+          process.env.NODE_ENV === 'production' ||
+          process.env.NODE_ENV === 'prod'
+            ? JSON.stringify('production') // 必须使用JSON.stringify，直接使用字符串会报错
+            : JSON.stringify('development')
+      }
+    })
   ],
   node: {
     global: true,
