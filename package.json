@@ -23,7 +23,8 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^10.1.1",
     "log4js": "^6.3.0",
-    "mongoose": "^6.0.12"
+    "mongoose": "^6.0.12",
+    "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
     "@types/clean-webpack-plugin": "^0.1.3",
