@@ -1,12 +1,12 @@
 import Router from 'koa-router'
-import usersRouter from './users'
-import publicRouter from './publicRouter'
+import common from './common'
+import login from './login'
 const router = new Router()
 // router.prefix('/api')
 
 router.use(
-  publicRouter.routes(),
-  usersRouter.routes()
+  common.routes(),
+  login.routes()
   // usersRouter.allowedMethods()
 )
 

@@ -1,6 +1,6 @@
 import SvgCaptcha from 'svg-captcha'
 import { ParameterizedContext } from 'koa'
-class PublicController {
+class Common {
   async getCaptcha(ctx: ParameterizedContext) {
     // eslint-disable-next-line
     // @ts-ignore
@@ -19,6 +19,6 @@ class PublicController {
   }
 }
 
-const publicController = new PublicController()
+const common = new Common()
 
-export default publicController
+export default common

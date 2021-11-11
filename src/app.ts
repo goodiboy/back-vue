@@ -1,7 +1,7 @@
 import Koa from 'koa'
 import router from './routes'
-import logUtil from './utils/logUtil'
-import middleware from './utils/composeMiddleware'
+import log from './plugin/log'
+import middleware from './plugin/compose'
 import compress from 'koa-compress' // 压缩中间件
 import './mongodb/db'
 const app = new Koa()
@@ -14,7 +14,7 @@ app.use(async (ctx, next) => {
   await next()
   const ms = Date.now() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-  logUtil.info(`log output info`)
+  log.info(`log output info`)
 })
 
 app.use(middleware).use(router.routes()).use(router.allowedMethods())
@@ -25,6 +25,6 @@ if (isProdMode) {
 }
 app.on('error', (err, ctx) => {
   console.log(err)
-  logUtil.error(err.stack)
+  log.error(err.stack)
 })
 app.listen(3001)

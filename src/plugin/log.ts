@@ -35,7 +35,7 @@ log4js.configure({
   }
 })
 
-class LogUtil {
+class Log {
   /**
    * level为debug的日志记录
    * @param content
@@ -66,4 +66,4 @@ class LogUtil {
     logger.error(content)
   }
 }
-export default new LogUtil()
+export default new Log()

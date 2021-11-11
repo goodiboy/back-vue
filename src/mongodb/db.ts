@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import logUtil from '../utils/logUtil'
+import logUtil from '../plugin/log'
 ;(async () => {
   const config = {
     url: 'mongodb://localhost:9527/manager'
