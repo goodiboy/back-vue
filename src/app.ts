@@ -1,9 +1,9 @@
 import Koa from 'koa'
 import router from './routes'
-import log from './plugin/log'
-import middleware from './plugin/compose'
+import log from './lib/log'
+import middleware from './lib/compose'
 import compress from 'koa-compress' // 压缩中间件
-import './mongodb/db'
+import './lib/mongodb'
 const app = new Koa()
 
 const isProdMode = process.env.NODE_ENV === 'production'

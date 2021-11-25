@@ -1,4 +1,4 @@
-import logUtil from '../plugin/log'
+import logUtil from '../lib/log'
 
 // 错误码
 export enum MsgCode {

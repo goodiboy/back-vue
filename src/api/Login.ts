@@ -1,4 +1,4 @@
-import send from '../plugin/email'
+import send from '../lib/email'
 import dayjs from 'dayjs'
 import isEmail from 'validator/lib/isEmail'
 import { ParameterizedContext } from 'koa'

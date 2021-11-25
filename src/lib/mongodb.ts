@@ -1,6 +1,6 @@
 import { connect, Schema, model, connection } from 'mongoose'
 import Config from '../config'
-import log from '../plugin/log'
+import log from './log'
 interface User {
   name: string
   email: string
