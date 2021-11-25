@@ -1,5 +1,5 @@
 import { connect, Schema, model, connection } from 'mongoose'
-import Config from '../config'
+import { DB_URL } from '../config'
 import log from './log'
 interface User {
   name: string
@@ -19,7 +19,7 @@ const UserModel = model<User>('User', schema, 'User')
 
 const run = async (): Promise<void> => {
   // 4. Connect to MongoDB
-  await connect(Config.DB_URL)
+  await connect(DB_URL)
 
   // const doc = new UserModel({
   //   name: 'Bill',

@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import { EmailInfo } from '../types/login'
+import { EMAIL_CONFIG } from '../config'
 
 // async..await is not allowed in global scope, must use a wrapper
 async function send(sendInfo: EmailInfo) {
@@ -8,15 +9,7 @@ async function send(sendInfo: EmailInfo) {
   // let testAccount = await nodemailer.createTestAccount();
 
   // create reusable transporter object using the default SMTP transport
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.qq.com',
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: '659555839@qq.com', // generated ethereal user
-      pass: 'ulmludfxxzwvbbga' // generated ethereal password
-    }
-  })
+  const transporter = nodemailer.createTransport(EMAIL_CONFIG)
   // let sendInfo = {
   //   code: '1234',
   //   expire: '2019-10-01',
@@ -28,7 +21,7 @@ async function send(sendInfo: EmailInfo) {
 
   // send mail with defined transport object
   return await transporter.sendMail({
-    from: '"认证邮件" <659555839@qq.com>', // sender address
+    from: `"认证邮件" <${EMAIL_CONFIG.auth.user}>`, // sender address
     to: sendInfo.email, // list of receivers
     subject:
       sendInfo.user !== ''
