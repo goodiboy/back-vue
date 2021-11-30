@@ -15,7 +15,7 @@ const schema = new Schema<User>({
 })
 
 // 3. Create a Model.
-const UserModel = model<User>('User', schema, 'User')
+const UserModel = model<User>('User', schema, 'users')
 
 const run = async (): Promise<void> => {
   // 4. Connect to MongoDB

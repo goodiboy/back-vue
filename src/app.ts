@@ -4,6 +4,8 @@ import log from './lib/log'
 import middleware from './lib/compose'
 import compress from 'koa-compress' // 压缩中间件
 import './lib/mongodb'
+import './lib/redisClient'
+
 const app = new Koa()
 
 const isProdMode = process.env.NODE_ENV === 'production'

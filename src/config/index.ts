@@ -16,8 +16,7 @@
 // }
 
 // mongodb配置
-const DB_URL =
-  'mongodb://admin:123456@8.134.51.195:9527/back_vue?authSource=admin'
+const DB_URL = 'mongodb://admin:123456@8.134.51.195:9527/back_vue'
 
 // email配置
 const EMAIL_CONFIG = {
@@ -30,4 +29,8 @@ const EMAIL_CONFIG = {
   }
 }
 
-export { DB_URL, EMAIL_CONFIG }
+const REDIS_CONFIG = {
+  url: 'redis://www.gdrcz.com:9901',
+  password: '123456'
+}
+export { DB_URL, EMAIL_CONFIG, REDIS_CONFIG }
