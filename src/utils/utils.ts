@@ -19,13 +19,6 @@ export interface PageType {
   skipIndex: number
 }
 
-// 返回的数据结构
-export interface ResponseType<T = any> {
-  data?: T | null
-  msg?: string | null
-  code?: MsgCode
-}
-
 /**
  * 分页结构封装
  * @param pageNum
@@ -44,37 +37,25 @@ export function pager({ pageNum = 1, pageSize = 10 }): PageType {
   }
 }
 
+// 返回的数据结构
+export interface ResponseType<T = any> {
+  data: T | null
+  msg: string | null
+  code: MsgCode
+}
+
 /**
  * 请求成功
  * @param data
  * @param msg
  * @param code
  */
-export function success<T = any>({
-  data,
-  msg = null,
+const success = <T = any>(
+  data: T,
+  msg: string | null = null,
   code = MsgCode.SUCCESS
-}: ResponseType<T>): ResponseType<T> {
-  logUtil.debug(data)
-  return {
-    code,
-    data,
-    msg
-  }
-}
-
-/**
- * 请求失败
- * @param data
- * @param msg
- * @param code
- */
-export function fail<T = any>({
-  data,
-  msg,
-  code = MsgCode.BUSINESS_ERROR
-}: ResponseType<T>): ResponseType<T> {
-  logUtil.debug(msg)
+): ResponseType<T> => {
+  // logUtil.debug(data)
   return {
     code,
     data,
@@ -88,11 +69,11 @@ export function fail<T = any>({
  * @param msg
  * @param code
  */
-export function catchError<T = any>({
-  data = null,
-  msg,
-  code = MsgCode.BUSINESS_ERROR
-}: ResponseType<T>): ResponseType<T> {
+const catchError = <T = any>(
+  msg = '系统出现异常，请稍后重试',
+  code = MsgCode.BUSINESS_ERROR,
+  data: T | null = null
+): ResponseType<T> => {
   logUtil.error(msg)
   return {
     code,
@@ -100,3 +81,24 @@ export function catchError<T = any>({
     msg
   }
 }
+
+/**
+ * 请求失败,参数错误
+ * @param data
+ * @param msg
+ * @param code
+ */
+const fail = <T = any>(
+  msg: string,
+  code = MsgCode.PARAM_ERROR,
+  data: T | null = null
+): ResponseType<T> => {
+  logUtil.debug(msg)
+  return {
+    code,
+    data,
+    msg
+  }
+}
+
+export { success, fail, catchError }

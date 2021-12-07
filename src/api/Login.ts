@@ -4,16 +4,14 @@ import isEmail from 'validator/lib/isEmail'
 import { ParameterizedContext } from 'koa'
 import jsonwebtoken from 'jsonwebtoken'
 import { JWT_SECRET } from '../config'
+import { catchError, fail, success } from '../utils/utils'
 
 export default class Login {
   static async forget(ctx: ParameterizedContext) {
     const { body } = ctx.request
     console.log(body)
     if (!isEmail(body.username)) {
-      return (ctx.body = {
-        code: -1,
-        msg: '邮箱格式错误'
-      })
+      return (ctx.body = fail('邮箱格式错误'))
     }
     try {
       // body.username -> database -> email
@@ -23,23 +21,12 @@ export default class Login {
         email: body.username,
         user: 'Brian'
       })
-      ctx.body = {
-        code: 200,
-        data: result.messageId,
-        msg: '邮件发送成功'
-      }
+      ctx.body = success(result.messageId, '邮件发送成功')
     } catch (e: any) {
-      console.log(e)
       if (e.responseCode === 550) {
-        return (ctx.body = {
-          code: -1,
-          msg: '邮箱未找到或访问被拒绝'
-        })
+        return (ctx.body = catchError('邮箱未找到或访问被拒绝'))
       }
-      ctx.body = {
-        code: -1,
-        msg: '系统出现异常，请稍后重试'
-      }
+      ctx.body = ctx.body = catchError()
     }
   }
 
@@ -47,9 +34,6 @@ export default class Login {
     const token = jsonwebtoken.sign({ name: '测试' }, JWT_SECRET, {
       expiresIn: '1d'
     })
-    ctx.body = {
-      code: 200,
-      token
-    }
+    ctx.body = success(token)
   }
 }
