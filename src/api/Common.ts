@@ -1,7 +1,7 @@
 import SvgCaptcha from 'svg-captcha'
 import { ParameterizedContext } from 'koa'
-class Common {
-  async getCaptcha(ctx: ParameterizedContext) {
+export default class Common {
+  static async getCaptcha(ctx: ParameterizedContext) {
     // eslint-disable-next-line
     // @ts-ignore
     const captcha = new SvgCaptcha.create({
@@ -18,7 +18,3 @@ class Common {
     }
   }
 }
-
-const common = new Common()
-
-export default common

@@ -4,6 +4,8 @@ import bodyParser from 'koa-bodyparser'
 import cors from '@koa/cors'
 import json from 'koa-json'
 import helmet from 'koa-helmet'
+import jwt from 'koa-jwt'
+import { JWT_SECRET } from '../config'
 
 const middleware = compose([
   bodyParser({
@@ -11,7 +13,8 @@ const middleware = compose([
   }),
   cors(),
   json(),
-  helmet()
+  helmet(),
+  jwt({ secret: JWT_SECRET }).unless({ path: [/^\/common/, /\/login/] })
 ])
 
 export default middleware

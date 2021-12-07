@@ -2,9 +2,11 @@ import send from '../lib/email'
 import dayjs from 'dayjs'
 import isEmail from 'validator/lib/isEmail'
 import { ParameterizedContext } from 'koa'
+import jsonwebtoken from 'jsonwebtoken'
+import { JWT_SECRET } from '../config'
 
-class Login {
-  async forget(ctx: ParameterizedContext) {
+export default class Login {
+  static async forget(ctx: ParameterizedContext) {
     const { body } = ctx.request
     console.log(body)
     if (!isEmail(body.username)) {
@@ -40,9 +42,14 @@ class Login {
       }
     }
   }
+
+  static login(ctx: ParameterizedContext) {
+    const token = jsonwebtoken.sign({ name: '测试' }, JWT_SECRET, {
+      expiresIn: '1d'
+    })
+    ctx.body = {
+      code: 200,
+      token
+    }
+  }
 }
-
-// 方便在调用的时候直接打login就有自动导入和函数提示
-const login = new Login()
-
-export default login

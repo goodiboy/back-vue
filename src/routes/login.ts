@@ -1,7 +1,8 @@
 import Router from 'koa-router'
-import login from '../api/Login'
+import Login from '../api/Login'
 const router = new Router()
 
-router.post('/forget', login.forget)
+router.post('/forget', Login.forget)
+router.post('/login', Login.login)
 
 export default router
