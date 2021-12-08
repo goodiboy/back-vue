@@ -15,7 +15,6 @@ if (isProdMode) {
   app.use(compress())
 }
 app.on('error', (err, ctx) => {
-  console.log(err)
   log.error(err.stack)
 })
 app.listen(3001)

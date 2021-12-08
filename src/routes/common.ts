@@ -1,8 +1,8 @@
 import Router from 'koa-router'
-import Common from '../api/Common'
+import { getCaptcha } from '../api/common'
 const router = new Router()
 
 router.prefix('/common')
-router.get('/getCaptcha', Common.getCaptcha)
+router.get('/getCaptcha', getCaptcha)
 
 export default router
