@@ -1,5 +1,20 @@
 // mongodb配置
+import { ConnectionOptions } from 'typeorm'
+
 const DB_URL = 'mongodb://admin:123456@8.134.51.195:9527/back_vue'
+
+const ORM_CONFIG: ConnectionOptions = {
+  type: 'mongodb',
+  host: '8.134.51.195',
+  port: 9527,
+  username: 'admin',
+  password: '123456',
+  database: 'back_vue',
+  entities: [__dirname + '/entity/*.ts'],
+  synchronize: true,
+  logging: false,
+  useUnifiedTopology: true
+}
 
 // email配置
 const EMAIL_CONFIG = {
@@ -21,4 +36,4 @@ const REDIS_CONFIG = {
 // jwt密钥
 const JWT_SECRET = 'whT63AimjiZ2SLF9JdfPeRyiwojozXg1'
 
-export { DB_URL, EMAIL_CONFIG, REDIS_CONFIG, JWT_SECRET }
+export { DB_URL, EMAIL_CONFIG, REDIS_CONFIG, JWT_SECRET, ORM_CONFIG }
