@@ -1,5 +1,6 @@
 // mongodb配置
 import { ConnectionOptions } from 'typeorm'
+import path from 'path'
 
 const DB_URL = 'mongodb://admin:123456@8.134.51.195:9527/back_vue'
 
@@ -10,7 +11,7 @@ const ORM_CONFIG: ConnectionOptions = {
   username: 'admin',
   password: '123456',
   database: 'back_vue',
-  entities: [__dirname + '/entity/*.ts'],
+  entities: [path.join(__dirname, '../', '/entity/*.ts')],
   synchronize: true,
   logging: false,
   useUnifiedTopology: true

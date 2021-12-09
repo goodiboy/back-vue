@@ -4,13 +4,12 @@ import { ORM_CONFIG } from '../config'
 // import { User } from '../entity/User'
 
 createConnection(ORM_CONFIG)
-
-// .then(async (connection) => {
+//   .then(async (connection) => {
 //   console.log('Inserting a new user into the database...')
 //   const user = new User()
 //   user.firstName = 'Timber'
 //   user.lastName = 'Saw'
-//   user.age = 25
+//   user.age = 250
 //   await connection.manager.save(user)
 //   console.log('Saved a new user with id: ' + user.id)
 //
