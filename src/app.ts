@@ -20,7 +20,7 @@ import redisClient from './lib/redisClient'
   app.use(middleware)
 
   const isProdMode = process.env.NODE_ENV === 'production'
-  // 如果是开发环境压缩中间件
+  // 如果是生产环境压缩中间件
   if (isProdMode) {
     app.use(compress())
   }
