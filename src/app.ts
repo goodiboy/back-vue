@@ -4,18 +4,28 @@ import log from './lib/log'
 import middleware from './lib/compose'
 import compress from 'koa-compress' // 压缩中间件
 // import './lib/mongodb'
-import './lib/redisClient'
-const app = new Koa()
+import orm from './lib/orm'
+import redisClient from './lib/redisClient'
+;(async () => {
+  // 链接redis数据库
+  await redisClient.connect().catch((err) => {
+    log.error('redis链接错误' + err)
+  })
 
-const isProdMode = process.env.NODE_ENV === 'production'
+  // 链接orm数据库
+  await orm
 
-app.use(middleware)
+  const app = new Koa()
 
-// 如果是开发环境压缩中间件
-if (isProdMode) {
-  app.use(compress())
-}
-app.on('error', (err, ctx) => {
-  log.error(err.stack)
-})
-app.listen(3001)
+  app.use(middleware)
+
+  const isProdMode = process.env.NODE_ENV === 'production'
+  // 如果是开发环境压缩中间件
+  if (isProdMode) {
+    app.use(compress())
+  }
+  app.on('error', (err, ctx) => {
+    log.error(err.stack)
+  })
+  app.listen(3001)
+})()

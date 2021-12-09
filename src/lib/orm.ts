@@ -3,7 +3,7 @@ import { createConnection } from 'typeorm'
 import { ORM_CONFIG } from '../config'
 // import { User } from '../entity/User'
 
-createConnection(ORM_CONFIG)
+export default createConnection(ORM_CONFIG)
 //   .then(async (connection) => {
 //   console.log('Inserting a new user into the database...')
 //   const user = new User()
