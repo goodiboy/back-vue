@@ -6,6 +6,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import { JWT_SECRET } from '../config'
 import { catchError, fail, success } from '../utils/utils'
 
+// 忘记密码
 export const forget = async (ctx: ParameterizedContext) => {
   const { body } = ctx.request
   console.log(body)
@@ -29,6 +30,7 @@ export const forget = async (ctx: ParameterizedContext) => {
   }
 }
 
+// 登陆接口
 export const login = (ctx: ParameterizedContext) => {
   const token = jsonwebtoken.sign({ name: '测试' }, JWT_SECRET, {
     expiresIn: '1d'
