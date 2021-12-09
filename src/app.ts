@@ -9,11 +9,13 @@ import redisClient from './lib/redisClient'
 ;(async () => {
   // 链接redis数据库
   await redisClient.connect().catch((err) => {
-    log.error('redis链接错误' + err)
+    log.error('redis数据库链接失败' + err)
   })
 
   // 链接orm数据库
-  await orm
+  await orm.catch((err) => {
+    log.error('orm数据库链接失败' + err)
+  })
 
   const app = new Koa()
 
