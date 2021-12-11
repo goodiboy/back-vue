@@ -16,6 +16,19 @@ import { LoginForm } from '../types/login'
 import { getRepository } from 'typeorm'
 import { Users } from '../entity/Users'
 
+const handleUserInfo = (user: Users) => {
+  // eslint-disable-next-line
+  // @ts-ignore
+  delete user.password // 把用户信息返回，删除密码
+
+  return {
+    token: jsonwebtoken.sign({ user }, JWT_SECRET, {
+      expiresIn: '1d' // 有效期一天
+    }),
+    userInfo: user
+  }
+}
+
 // 忘记密码
 export const forget = async (ctx: ParameterizedContext) => {
   const { body } = ctx.request
@@ -41,11 +54,29 @@ export const forget = async (ctx: ParameterizedContext) => {
 }
 
 // 登陆接口
-export const login = (ctx: ParameterizedContext) => {
-  const token = jsonwebtoken.sign({ name: '测试' }, JWT_SECRET, {
-    expiresIn: '1d'
-  })
-  ctx.body = success(token)
+export const login = async (ctx: ParameterizedContext) => {
+  const { username, password, captcha, captchaId } = ctx.request
+    .body as LoginForm
+  // 判断是否确实参数
+  if (!username || !password || !captcha || !captchaId) {
+    return (ctx.body = fail('缺失参数'))
+  }
+
+  // 校验验证码是否正确
+  if (!(await checkCaptchaValid(captcha, captchaId, ctx))) {
+    return
+  }
+
+  const usersRepository = getRepository(Users)
+
+  const user = await usersRepository.findOne({ username, id: 0 })
+
+  // 如果用户不存在，或者密码不正确，返回错误信息
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return (ctx.body = fail('账号或密码错误', MsgCode.USER_ACCOUNT_ERROR))
+  }
+
+  return (ctx.body = success(handleUserInfo(user)))
 }
 
 // 注册接口
@@ -93,15 +124,6 @@ export const register = async (ctx: ParameterizedContext) => {
 
   const account = new Users(userInfo)
   const resUser = await usersRepository.save(account) // 添加用户到数据库
-  // eslint-disable-next-line
-  // @ts-ignore
-  delete resUser.password // 把用户信息返回，删除密码
 
-  const data = {
-    token: jsonwebtoken.sign({ userInfo }, JWT_SECRET, {
-      expiresIn: '1d' // 有效期一天
-    }),
-    userInfo: resUser
-  }
-  return (ctx.body = success(data))
+  return (ctx.body = success(handleUserInfo(resUser)))
 }
