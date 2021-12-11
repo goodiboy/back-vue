@@ -15,7 +15,11 @@ export const getCaptcha = async (ctx: ParameterizedContext) => {
     width: 150, // 宽度
     height: 38 // 高度
   })
+  const id = nanoid()
   // 设置定时，EX代表秒，即5分支后验证码失效
-  redisClient.set(nanoid(), captcha.text, { EX: 5 * 60 })
-  ctx.body = success(captcha.data)
+  redisClient.set(id, captcha.text, { EX: 5 * 60 })
+  ctx.body = success({
+    id,
+    data: captcha.data
+  })
 }

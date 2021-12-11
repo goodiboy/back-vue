@@ -2,11 +2,11 @@
 import { ConnectionOptions } from 'typeorm'
 import path from 'path'
 
-const DB_URL = 'mongodb://admin:123456@8.134.51.195:9527/back_vue'
+const DB_URL = 'mongodb://admin:123456@localhost:9527/back_vue'
 
 const ORM_CONFIG: ConnectionOptions = {
   type: 'mongodb',
-  host: '8.134.51.195',
+  host: 'localhost',
   port: 9527,
   username: 'admin',
   password: '123456',
@@ -30,7 +30,7 @@ const EMAIL_CONFIG = {
 
 // redis配置
 const REDIS_CONFIG = {
-  url: 'redis://www.gdrcz.com:9901',
+  url: 'redis://localhost:9901',
   password: '123456'
 }
 

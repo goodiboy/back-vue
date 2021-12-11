@@ -1,10 +1,12 @@
 import logUtil from '../lib/log'
-
+import redisClient from '../lib/redisClient'
+import { ParameterizedContext } from 'koa'
 // 错误码
 export enum MsgCode {
   SUCCESS = 200,
   PARAM_ERROR = 501, // 参数错误
   USER_ACCOUNT_ERROR = 402, //账号或密码错误
+  USER_EXISTED = 403, // 用户已存在，昵称重复
   USER_LOGIN_ERROR = 400, // 用户未登录
   BUSINESS_ERROR = 500, //业务请求失败
   AUTH_ERROR = 401 // 认证失败或TOKEN过期
@@ -89,7 +91,7 @@ const catchError = <T = any>(
  * @param code
  */
 const fail = <T = any>(
-  msg: string,
+  msg = '参数错误',
   code = MsgCode.PARAM_ERROR,
   data: T | null = null
 ): ResponseType<T> => {
@@ -101,4 +103,29 @@ const fail = <T = any>(
   }
 }
 
-export { success, fail, catchError }
+/**
+ * 校验图像验证码是否正确
+ * @param captcha 图像验证码
+ * @param captchaId 验证码id
+ * @param ctx koa上下文
+ */
+const checkCaptchaValid = async (
+  captcha: string,
+  captchaId: string,
+  ctx: ParameterizedContext
+) => {
+  const value = await redisClient.get(captchaId)
+  console.log(captchaId)
+  console.log(value)
+  if (!value) {
+    ctx.body = fail('验证码已失效，请重新获取')
+    return false
+  }
+  if (value.toLocaleLowerCase() !== captcha.toLocaleLowerCase()) {
+    ctx.body = fail('验证码不正确，请重新输入')
+    return false
+  }
+  return true
+}
+
+export { success, fail, catchError, checkCaptchaValid }

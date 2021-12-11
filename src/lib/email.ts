@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
-import { EmailInfo } from '../types/login'
 import { EMAIL_CONFIG } from '../config'
+import { EmailInfo } from '../types/common'
 
 // async..await is not allowed in global scope, must use a wrapper
 async function send(sendInfo: EmailInfo) {

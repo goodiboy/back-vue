@@ -6,6 +6,8 @@ import compress from 'koa-compress' // 压缩中间件
 // import './lib/mongodb'
 import orm from './lib/orm'
 import redisClient from './lib/redisClient'
+// import { getRepository } from 'typeorm'
+// import { Users } from './entity/Users'
 ;(async () => {
   // 链接redis数据库
   await redisClient.connect().catch((err) => {
@@ -16,6 +18,9 @@ import redisClient from './lib/redisClient'
   await orm.catch((err) => {
     log.error('orm数据库链接失败' + err)
   })
+
+  // const users = getRepository(Users)
+  // console.log(await users.findOne())
 
   const app = new Koa()
 
@@ -30,4 +35,5 @@ import redisClient from './lib/redisClient'
     log.error(err.stack)
   })
   app.listen(3001)
+  log.info('服务器启动成功')
 })()
