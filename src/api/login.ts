@@ -69,7 +69,7 @@ export const login = async (ctx: ParameterizedContext) => {
 
   const usersRepository = getRepository(Users)
 
-  const user = await usersRepository.findOne({ username, id: 0 })
+  const user = await usersRepository.findOne({ username })
 
   // 如果用户不存在，或者密码不正确，返回错误信息
   if (!user || !(await bcrypt.compare(password, user.password))) {
