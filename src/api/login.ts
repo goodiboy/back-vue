@@ -14,9 +14,9 @@ import {
 } from '../utils/utils'
 import { LoginForm } from '../types/login'
 import UserModel from '../model/Users'
-import { UserInfoSchema } from '../types/userInfo'
+import { UserInfo } from '../types/userInfo'
 
-const handleUserInfo = (user: UserInfoSchema) => {
+const handleUserInfo = (user: UserInfo) => {
   // eslint-disable-next-line
   // @ts-ignore
   delete user.password // 把用户信息返回，删除密码
