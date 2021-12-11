@@ -13,10 +13,10 @@ import {
   success
 } from '../utils/utils'
 import { LoginForm } from '../types/login'
-import { getRepository } from 'typeorm'
-import { Users } from '../entity/Users'
+import UserModel from '../model/Users'
+import { UserInfoSchema } from '../types/userInfo'
 
-const handleUserInfo = (user: Users) => {
+const handleUserInfo = (user: UserInfoSchema) => {
   // eslint-disable-next-line
   // @ts-ignore
   delete user.password // 把用户信息返回，删除密码
@@ -67,9 +67,7 @@ export const login = async (ctx: ParameterizedContext) => {
     return
   }
 
-  const usersRepository = getRepository(Users)
-
-  const user = await usersRepository.findOne({ username })
+  const user = await UserModel.findOne({ username }, { _id: 0 })
 
   // 如果用户不存在，或者密码不正确，返回错误信息
   if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -95,23 +93,20 @@ export const register = async (ctx: ParameterizedContext) => {
   ) {
     return (ctx.body = fail('缺失参数'))
   }
-  console.log(username, password, password2, captcha)
 
   // 校验验证码是否正确
   if (!(await checkCaptchaValid(captcha, captchaId, ctx))) {
     return
   }
 
-  const usersRepository = getRepository(Users)
-
   // 查询邮箱是否已注册
-  const user1 = await usersRepository.findOne({ username })
+  const user1 = await UserModel.findOne({ username })
   if (user1) {
     return (ctx.body = fail('该邮箱已注册', MsgCode.USER_EXISTED))
   }
 
   // 查询昵称是否已被使用
-  const user2 = await usersRepository.findOne({ nickname })
+  const user2 = await UserModel.findOne({ nickname })
   if (user2) {
     return (ctx.body = fail('用户昵称已存在', MsgCode.USER_EXISTED))
   }
@@ -122,8 +117,7 @@ export const register = async (ctx: ParameterizedContext) => {
     password: bcrypt.hashSync(password, 12) // 密码加密
   }
 
-  const account = new Users(userInfo)
-  const resUser = await usersRepository.save(account) // 添加用户到数据库
-
+  const account = new UserModel(userInfo)
+  const resUser = await account.save() // 添加用户到数据库
   return (ctx.body = success(handleUserInfo(resUser)))
 }

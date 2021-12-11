@@ -3,24 +3,16 @@ import Koa from 'koa'
 import log from './lib/log'
 import middleware from './lib/compose'
 import compress from 'koa-compress' // 压缩中间件
-// import './lib/mongodb'
-import orm from './lib/orm'
 import redisClient from './lib/redisClient'
-// import { getRepository } from 'typeorm'
-// import { Users } from './entity/Users'
+import run from './lib/mongodb'
 ;(async () => {
   // 链接redis数据库
   await redisClient.connect().catch((err) => {
     log.error('redis数据库链接失败' + err)
   })
 
-  // 链接orm数据库
-  await orm.catch((err) => {
-    log.error('orm数据库链接失败' + err)
-  })
-
-  // const users = getRepository(Users)
-  // console.log(await users.findOne())
+  // 链接mongodb数据库
+  await run().catch((err: Error) => log.error('数据库发生错误-->' + err))
 
   const app = new Koa()
 

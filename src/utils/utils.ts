@@ -1,6 +1,7 @@
 import logUtil from '../lib/log'
 import redisClient from '../lib/redisClient'
 import { ParameterizedContext } from 'koa'
+import dayjs from 'dayjs'
 // 错误码
 export enum MsgCode {
   SUCCESS = 200,
@@ -128,4 +129,8 @@ const checkCaptchaValid = async (
   return true
 }
 
-export { success, fail, catchError, checkCaptchaValid }
+const CurrentTime = () => {
+  return dayjs().format('YYYY-MM-DD HH:mm:ss')
+}
+
+export { success, fail, catchError, checkCaptchaValid, CurrentTime }

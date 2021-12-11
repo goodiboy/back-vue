@@ -6,11 +6,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { UserBaseInfo } from '../types/userInfo'
+import { UserInfo } from '../types/userInfo'
 
 @Entity()
 export class Users {
-  constructor(data?: UserBaseInfo) {
+  constructor(data?: UserInfo) {
     if (data) {
       this.username = data.username
       this.password = data.password
