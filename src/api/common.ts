@@ -20,6 +20,7 @@ export const getCaptcha = async (ctx: ParameterizedContext) => {
   redisClient.set(id, captcha.text, { EX: 5 * 60 })
   ctx.body = success({
     id,
-    data: captcha.data
+    img: captcha.data,
+    text: captcha.text
   })
 }
