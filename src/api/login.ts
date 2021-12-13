@@ -14,6 +14,7 @@ import {
 import { LoginForm } from '../types/login'
 import UserModel from '../model/Users'
 import { UserInfo } from '../types/userInfo'
+import { nanoid } from 'nanoid'
 
 const handleUserInfo = (user: UserInfo) => {
   // eslint-disable-next-line
@@ -49,7 +50,7 @@ export const reset = async (ctx: ParameterizedContext) => {
 
   try {
     // body.username -> database -> email
-    const pwd = 'qqqq1111'
+    const pwd = nanoid(6)
     await UserModel.updateOne(
       { username },
       { password: bcrypt.hashSync(pwd, 12) }
@@ -65,7 +66,6 @@ export const reset = async (ctx: ParameterizedContext) => {
     if (e.responseCode === 550) {
       return (ctx.body = catchError('邮箱未找到或访问被拒绝'))
     }
-    console.log(23)
     ctx.body = ctx.body = catchError(e)
   }
 }
