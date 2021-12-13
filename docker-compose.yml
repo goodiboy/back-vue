@@ -1,0 +1,32 @@
+version: "3"
+services:
+  # mongodb数据库
+  my-mongo:
+    image: "mongo"
+    restart: always
+    container_name: "my-mongo"
+    ports:
+      - 9527:27017
+      # 最新版本的mac，无法在根目录创建data目录，本地存放到~/data/mongo，服务存放在data/mongo
+    volumes:
+      - ~/data/mongo/data:/data/db
+      - ~/data/mongo/conf:/data/configdb
+      - ~/data/mongo/log:/data/log
+    command: ["--auth", "--logpath", "/data/log/mongod.log"]
+    # environment:
+    #  - MONGO_INITDB_ROOT_USERNAME: "admin"
+    #  - MONGO_INITDB_ROOT_PASSWORD: "123456"
+
+
+  # redis数据库
+  my-redis:
+    image: "redis"
+    restart: always
+    container_name: "my-redis"
+    ports:
+      - 9901:6379
+       # 最新版本的mac，无法在根目录创建data目录，本地存放到~/data/mongo，服务存放在data/mongo
+    volumes:
+      - ~/data/redis/data:/data
+      - ~/data/redis/conf:/usr/local/etc/redis
+    command: ["redis-server","--requirepass","123456"]
