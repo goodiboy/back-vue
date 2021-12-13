@@ -1,9 +1,9 @@
 import Router from 'koa-router'
-import { forget, login, register } from '../api/login'
+import { reset, login, register } from '../api/login'
 const router = new Router()
 
 router.prefix('/login')
-router.post('/forget', forget)
+router.post('/reset', reset)
 router.post('/login', login)
 router.post('/register', register)
 

@@ -11,16 +11,17 @@ export const getCaptcha = async (ctx: ParameterizedContext) => {
     size: 4, // 数量
     ignoreChars: '0oil', // 排除某些字母
     color: true,
+    fontSize: 36,
     noise: Math.floor(Math.random() * 5), // 线条的数量
     width: 130, // 宽度
     height: 38 // 高度
   })
-  const id = nanoid()
+  const captchaId = nanoid()
   // 设置定时，EX代表秒，即5分支后验证码失效
-  redisClient.set(id, captcha.text, { EX: 5 * 60 })
+  redisClient.set(captchaId, captcha.text, { EX: 5 * 60 })
   ctx.body = success({
-    id,
-    img: captcha.data,
-    text: captcha.text
+    captchaId,
+    captcha: captcha.data,
+    captchaText: captcha.text
   })
 }

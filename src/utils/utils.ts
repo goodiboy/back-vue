@@ -8,6 +8,7 @@ export enum MsgCode {
   PARAM_ERROR = 501, // 参数错误
   USER_ACCOUNT_ERROR = 402, //账号或密码错误
   USER_EXISTED = 403, // 用户已存在，昵称重复
+  USER_INVALID = 405, // 用户不存在
   USER_LOGIN_ERROR = 400, // 用户未登录
   BUSINESS_ERROR = 500, //业务请求失败
   AUTH_ERROR = 401 // 认证失败或TOKEN过期
@@ -116,8 +117,6 @@ const checkCaptchaValid = async (
   ctx: ParameterizedContext
 ) => {
   const value = await redisClient.get(captchaId)
-  console.log(captchaId)
-  console.log(value)
   if (!value) {
     ctx.body = fail('验证码已失效，请重新获取')
     return false
@@ -129,8 +128,8 @@ const checkCaptchaValid = async (
   return true
 }
 
-const CurrentTime = () => {
+const currentTime = () => {
   return dayjs().format('YYYY-MM-DD HH:mm:ss')
 }
 
-export { success, fail, catchError, checkCaptchaValid, CurrentTime }
+export { success, fail, catchError, checkCaptchaValid, currentTime }

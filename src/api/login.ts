@@ -1,5 +1,4 @@
 import send from '../lib/email'
-import dayjs from 'dayjs'
 import bcrypt from 'bcrypt'
 import isEmail from 'validator/lib/isEmail'
 import { ParameterizedContext } from 'koa'
@@ -30,26 +29,44 @@ const handleUserInfo = (user: UserInfo) => {
 }
 
 // 忘记密码
-export const forget = async (ctx: ParameterizedContext) => {
-  const { body } = ctx.request
-  console.log(body)
-  if (!isEmail(body.username)) {
+export const reset = async (ctx: ParameterizedContext) => {
+  const { username, captcha, captchaId } = ctx.request.body as LoginForm
+
+  // 校验验证码是否正确
+  if (!(await checkCaptchaValid(captcha, captchaId, ctx))) {
+    return
+  }
+
+  if (!isEmail(username)) {
     return (ctx.body = fail('邮箱格式错误'))
   }
+
+  const user = await UserModel.findOne({ username })
+
+  if (!user) {
+    return (ctx.body = fail('用户不存在', MsgCode.USER_INVALID))
+  }
+
   try {
     // body.username -> database -> email
+    const pwd = 'qqqq1111'
+    await UserModel.updateOne(
+      { username },
+      { password: bcrypt.hashSync(pwd, 12) }
+    )
+
     const result = await send({
-      code: '1234',
-      expire: dayjs().add(30, 'minute').format('YYYY-MM-DD HH:mm:ss'),
-      email: body.username,
-      user: 'Brian'
+      username: user.username,
+      password: pwd,
+      nickname: user.nickname
     })
     ctx.body = success(result.messageId, '邮件发送成功')
   } catch (e: any) {
     if (e.responseCode === 550) {
       return (ctx.body = catchError('邮箱未找到或访问被拒绝'))
     }
-    ctx.body = ctx.body = catchError()
+    console.log(23)
+    ctx.body = ctx.body = catchError(e)
   }
 }
 

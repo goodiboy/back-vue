@@ -1,6 +1,5 @@
 export interface EmailInfo {
-  code: string
-  expire: string
-  email: string
-  user: string
+  username: string
+  nickname: string
+  password: string
 }

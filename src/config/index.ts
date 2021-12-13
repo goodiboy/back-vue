@@ -8,7 +8,7 @@ const EMAIL_CONFIG = {
   secure: false, // true for 465, false for other ports
   auth: {
     user: '659555839@qq.com', // generated ethereal user
-    pass: 'ulmludfxxzwvbbga' // generated ethereal password
+    pass: 'koponxiocojfbajc' // generated ethereal password
   }
 }
 
