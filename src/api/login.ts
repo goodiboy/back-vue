@@ -61,7 +61,10 @@ export const reset = async (ctx: ParameterizedContext) => {
       password: pwd,
       nickname: user.nickname
     })
-    ctx.body = success(result.messageId, '邮件发送成功')
+    ctx.body = success(
+      result.messageId,
+      '密码重置成功，新的密码已发生到您的邮箱'
+    )
   } catch (e: any) {
     if (e.responseCode === 550) {
       return (ctx.body = catchError('邮箱未找到或访问被拒绝'))
