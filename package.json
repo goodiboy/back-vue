@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "build": "cross-env NODE_ENV=prod webpack --config config/webpack.config.prod.ts",
-    "dev": "cross-env NODE_ENV=dev npx nodemon src/app.ts"
+    "dev": "cross-env NODE_ENV=dev nodemon src/app.ts"
   },
   "keywords": [],
   "author": "",
