@@ -1,0 +1,13 @@
+{
+  "name": "Vue3 接口文档",
+  "description": "",
+  "version": "0.0.0",
+  "title": "接口文档",
+  "sampleUrl": "http://localhost:3001",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true,
+    "aloneDisplay": false
+  }
+}
+
