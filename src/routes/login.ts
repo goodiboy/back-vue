@@ -1,5 +1,7 @@
 import Router from 'koa-router'
-import { reset, login, register } from '../api/login'
+import reset from '../api/login/reset'
+import login from '../api/login/login'
+import register from '../api/login/register'
 const router = new Router()
 
 router.prefix('/login')
