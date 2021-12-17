@@ -28,7 +28,6 @@ export default async (ctx: ParameterizedContext) => {
     ignoreChars: '0oil', // 排除某些字母
     color: true,
     fontSize: 36,
-    noise: Math.floor(Math.random() * 5), // 线条的数量
     width: 130, // 宽度
     height: 38 // 高度
   })
