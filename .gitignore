@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 #log文件
 logs
+
+#api文档目录
+doc

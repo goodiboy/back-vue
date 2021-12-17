@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import Koa from 'koa'
 import log from './lib/log'
 import middleware from './lib/compose'
