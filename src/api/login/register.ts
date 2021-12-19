@@ -16,7 +16,7 @@ import { handleUserInfo } from './util'
  @apiBody {String} nickname 用户昵称
  @apiParamExample {json} 请求示例
  {
-    captcha: "vcgu"
+    captcha: "11"
     captchaId: "YpPSJqtoyFmNfUBMXFj-M"
     nickname: "测试注册"
     password: "123"

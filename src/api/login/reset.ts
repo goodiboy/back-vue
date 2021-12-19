@@ -22,7 +22,7 @@ import send from '../../lib/email'
  @apiUse loginParams
  @apiParamExample {json} 请求示例
   {
-      captcha: "qqh4"
+      captcha: "11"
       captchaId: "56Jj051C5argxUBcLSpld"
       username: "123@qq.com"
   }

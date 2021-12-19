@@ -14,7 +14,7 @@ import { handleUserInfo } from './util'
  @apiBody {String} password 密码
  @apiParamExample {json} 请求示例
  {
-    captcha: "hf36"
+    captcha: "11"
     captchaId: "XBC4bhwNaGAXjyYIqKy92"
     password: "123"
     username: "12345@qq.com"

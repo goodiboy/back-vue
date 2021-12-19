@@ -1,4 +1,4 @@
-import SvgCaptcha from 'svg-captcha'
+import SvgCaptcha, { createMathExpr } from 'svg-captcha'
 import { ParameterizedContext } from 'koa'
 import { nanoid } from 'nanoid'
 import redisClient from '../../lib/redisClient'
@@ -15,7 +15,7 @@ import { success } from '../../utils/utils'
     "data": {
         "captchaId": "n5WU8c4Ds1Sw8VLgb9rNP",
         "captcha": svg标签图片,
-        "captchaText": "DRGI"
+        "captchaText": "4 + 3"
     },
     "msg": null
  }
@@ -23,10 +23,8 @@ import { success } from '../../utils/utils'
 export default async (ctx: ParameterizedContext) => {
   // eslint-disable-next-line
   // @ts-ignore
-  const captcha = new SvgCaptcha.create({
-    size: 4, // 数量
-    ignoreChars: '0oil', // 排除某些字母
-    color: true,
+  const captcha = new SvgCaptcha.createMathExpr({
+    color: false,
     fontSize: 36,
     width: 130, // 宽度
     height: 38 // 高度
