@@ -19,8 +19,8 @@ import { decryptRsa, handleUserInfo } from './util'
     captcha: "11"
     captchaId: "YpPSJqtoyFmNfUBMXFj-M"
     nickname: "测试注册"
-    password: "123"
-    password2: "123"
+    password: "=¥¥7ü\u001d\u0006íæ\u0007pBráÎc\u0001q(SC\ngQ\\¼]4x#TKóõ_,{û jc]¦û>Þt× È,R?4I½´¯FÈìå\tF)\u0002Yõx\f\r\u001a\r\u0001­I¤Tðp\u0001´¶¡OÍ{Í\u0014ðµD¥µh/è±-ÛÊìUî~Aå\u0016áÉÆé¥9!À¤Ö½S\u001bÛ%<=Ý\nïÚ~Ö®Å¶ýÃü§¦ÙÌå§°¡0¢¯!\u0016%@\u0018ÓÔ\u0015>\u000e§]ÑÄÛØ¶ríýv®i:ù¡Îòë\u001f\u001a\u0019\u0007rl3GV(\u0006fÚ\u0005\u001e2L7ã Öüû®ÓÒ\u0002ºeSY\u001f­Ý\u001d×,Yôÿ£÷µ­Îøç\u000eè%¬Ãý"
+    password2: "=¥¥7ü\u001d\u0006íæ\u0007pBráÎc\u0001q(SC\ngQ\\¼]4x#TKóõ_,{û jc]¦û>Þt× È,R?4I½´¯FÈìå\tF)\u0002Yõx\f\r\u001a\r\u0001­I¤Tðp\u0001´¶¡OÍ{Í\u0014ðµD¥µh/è±-ÛÊìUî~Aå\u0016áÉÆé¥9!À¤Ö½S\u001bÛ%<=Ý\nïÚ~Ö®Å¶ýÃü§¦ÙÌå§°¡0¢¯!\u0016%@\u0018ÓÔ\u0015>\u000e§]ÑÄÛØ¶ríýv®i:ù¡Îòë\u001f\u001a\u0019\u0007rl3GV(\u0006fÚ\u0005\u001e2L7ã Öüû®ÓÒ\u0002ºeSY\u001f­Ý\u001d×,Yôÿ£÷µ­Îøç\u000eè%¬Ãý"
     username: "12345@qq.com"
   }
  @apiUse loginSuccessExample
