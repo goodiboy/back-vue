@@ -3,7 +3,7 @@ import { LoginForm } from '../../types/login'
 import { checkCaptchaValid, fail, MsgCode, success } from '../../utils/utils'
 import UserModel from '../../model/Users'
 import bcrypt from 'bcrypt'
-import { handleUserInfo } from './util'
+import { decryptRsa, handleUserInfo } from './util'
 
 /**
  @api {post} /login/register 注册账号
@@ -11,8 +11,8 @@ import { handleUserInfo } from './util'
  @apiGroup 用户验证
  @apiName 注册账号
  @apiUse loginParams
- @apiBody {String} password 密码
- @apiBody {String} password2 重复密码
+ @apiBody {String} password rsa加密后的密码
+ @apiBody {String} password2 rsa加密后的重复密码
  @apiBody {String} nickname 用户昵称
  @apiParamExample {json} 请求示例
  {
@@ -45,6 +45,7 @@ export default async (ctx: ParameterizedContext) => {
   if (!(await checkCaptchaValid(captcha, captchaId, ctx))) {
     return
   }
+  const decryptPassword = decryptRsa(password)
 
   // 查询邮箱是否已注册
   const user1 = await UserModel.findOne({ username })
@@ -61,7 +62,7 @@ export default async (ctx: ParameterizedContext) => {
   const userInfo = {
     username,
     nickname,
-    password: bcrypt.hashSync(password, 12) // 密码加密
+    password: bcrypt.hashSync(decryptPassword, 12) // 密码加密
   }
 
   const account = new UserModel(userInfo)
