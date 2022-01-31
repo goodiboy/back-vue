@@ -35,7 +35,7 @@ export default async (ctx: ParameterizedContext) => {
     return
   }
 
-  const user = await UserModel.findOne({ username }, { _id: 0 })
+  const user = await UserModel.findOne({ username })
 
   // 如果用户不存在，或者密码不正确，返回错误信息
   if (!user || !(await bcrypt.compare(decryptPassword, user.password))) {
