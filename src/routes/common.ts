@@ -1,5 +1,5 @@
 import Router from 'koa-router'
-import getCaptcha from '../api/common/getCaptcha'
+import getCaptcha from '../api/common/captcha'
 const router = new Router()
 
 router.prefix('/common')
