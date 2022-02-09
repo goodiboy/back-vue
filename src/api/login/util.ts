@@ -1,4 +1,4 @@
-import { UserInfo } from '../../types/userInfo'
+import type { UserInfo } from '../../types/userInfo'
 import jsonwebtoken from 'jsonwebtoken'
 import { JWT_SECRET } from '../../config'
 import { pki } from 'node-forge'

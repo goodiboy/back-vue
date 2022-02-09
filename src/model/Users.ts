@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import { UserInfo } from '../types/userInfo'
+import type { UserInfo } from '../types/userInfo'
 import { currentTime } from '../utils/utils'
 const schema = new Schema<UserInfo>({
   username: { type: String, required: true, unique: true },

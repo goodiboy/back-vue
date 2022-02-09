@@ -1,5 +1,5 @@
-import { ParameterizedContext } from 'koa'
-import { LoginForm } from '../../types/login'
+import type { ParameterizedContext } from 'koa'
+import type { LoginForm } from '../../types/login'
 import { checkCaptchaValid, fail, MsgCode, success } from '../../utils/utils'
 import UserModel from '../../model/Users'
 import bcrypt from 'bcrypt'

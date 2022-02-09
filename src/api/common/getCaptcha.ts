@@ -1,5 +1,5 @@
-import SvgCaptcha, { createMathExpr } from 'svg-captcha'
-import { ParameterizedContext } from 'koa'
+import { createMathExpr } from 'svg-captcha'
+import type { ParameterizedContext } from 'koa'
 import { nanoid } from 'nanoid'
 import redisClient from '../../lib/redisClient'
 import { success } from '../../utils/utils'
@@ -23,7 +23,7 @@ import { success } from '../../utils/utils'
 export default async (ctx: ParameterizedContext) => {
   // eslint-disable-next-line
   // @ts-ignore
-  const captcha = new SvgCaptcha.createMathExpr({
+  const captcha = createMathExpr({
     color: false,
     fontSize: 36,
     width: 130, // 宽度

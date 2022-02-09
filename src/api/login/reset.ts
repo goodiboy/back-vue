@@ -1,6 +1,6 @@
 // 忘记密码
-import { ParameterizedContext } from 'koa'
-import { LoginForm } from '../../types/login'
+import type { ParameterizedContext } from 'koa'
+import type { LoginForm } from '../../types/login'
 import {
   catchError,
   checkCaptchaValid,
