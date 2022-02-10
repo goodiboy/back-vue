@@ -1,5 +1,5 @@
 import logUtil from '../lib/log'
-import redisClient from '../lib/redisClient'
+import redisClient from '../lib/redis-client'
 import { ParameterizedContext } from 'koa'
 import dayjs from 'dayjs'
 // 错误码

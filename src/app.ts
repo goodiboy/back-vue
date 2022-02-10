@@ -2,7 +2,7 @@ import Koa from 'koa'
 import log from './lib/log'
 import middleware from './lib/compose'
 import compress from 'koa-compress' // 压缩中间件
-import redisClient from './lib/redisClient'
+import redisClient from './lib/redis-client'
 import run from './lib/mongodb'
 ;(async () => {
   // 链接redis数据库

@@ -1,7 +1,7 @@
 import { createMathExpr } from 'svg-captcha'
 import type { ParameterizedContext } from 'koa'
 import { nanoid } from 'nanoid'
-import redisClient from '../../lib/redisClient'
+import redisClient from '../../lib/redis-client'
 import { success } from '../../utils/utils'
 
 /**
