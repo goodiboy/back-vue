@@ -28,7 +28,7 @@ export interface PageType {
  * @param pageNum
  * @param pageSize
  */
-export function pager({ pageNum = 1, pageSize = 10 }): PageType {
+export const pager = ({ pageNum = 1, pageSize = 10 }): PageType => {
   pageNum = Number(pageNum)
   pageSize = Number(pageSize)
   const skipIndex = (pageNum - 1) * pageSize
@@ -132,4 +132,21 @@ const currentTime = () => {
   return dayjs().format('YYYY-MM-DD HH:mm:ss')
 }
 
-export { success, fail, catchError, checkCaptchaValid, currentTime }
+const formatParam = <T = any>(params: T): T => {
+  const res: any = {}
+  for (const key in params) {
+    if (params[key]) {
+      res[key] = params[key]
+    }
+  }
+  return res
+}
+
+export {
+  success,
+  fail,
+  catchError,
+  checkCaptchaValid,
+  currentTime,
+  formatParam
+}

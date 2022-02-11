@@ -1,3 +1,5 @@
+import type { PageType } from './common'
+
 export enum UserState {
   working, // 在职
   quit, // 离职
@@ -20,6 +22,7 @@ export enum Sex {
 }
 
 export interface UserInfo {
+  userId: string
   username: string
   password: string
   nickname: string
@@ -34,3 +37,12 @@ export interface UserInfo {
   systemRole: SystemRole[]
   remark: string
 }
+
+// 用户查询表单
+export interface UserQueryForm {
+  _id?: string
+  username?: string
+  state?: UserState | number // 有一个选项是0代表全部
+}
+
+export type UserListParams = UserQueryForm & PageType
