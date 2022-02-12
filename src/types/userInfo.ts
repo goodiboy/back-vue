@@ -6,12 +6,7 @@ export enum UserState {
   trial // 试用期
 }
 
-export enum UserRole {
-  admin, // 管理员
-  ordinary // 普通用户
-}
-
-export interface SystemRole {
+export interface Role {
   roleName: string
   _id: string
 }
@@ -22,7 +17,8 @@ export enum Sex {
 }
 
 export interface UserInfo {
-  userId: string
+  _id: string
+  num: number
   username: string
   password: string
   nickname: string
@@ -33,8 +29,8 @@ export interface UserInfo {
   deptId: string[]
   job: string
   state: UserState
-  userRole: UserRole
-  systemRole: SystemRole[]
+  admin: boolean
+  roleList: Role[]
   remark: string
 }
 

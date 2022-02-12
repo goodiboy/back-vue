@@ -2,6 +2,7 @@ import { model, Schema } from 'mongoose'
 import type { UserInfo } from '../types/userInfo'
 import { currentTime } from '../utils/utils'
 const schema = new Schema<UserInfo>({
+  num: { type: Number, required: true }, // 记录用户是第几位员工
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   nickname: { type: String, required: true, unique: true },
@@ -15,11 +16,8 @@ const schema = new Schema<UserInfo>({
     type: Number,
     default: 1
   }, // 1: 在职 2: 离职 3: 试用期
-  userRole: {
-    type: Number,
-    default: 1
-  }, // 用户角色 0：系统管理员  1： 普通用户
-  systemRole: [], //系统角色
+  admin: false, // 是否系统管理员
+  roleList: [], //系统角色
   remark: String
 })
 
