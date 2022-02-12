@@ -36,7 +36,7 @@ export interface UserInfo {
 
 // 用户查询表单
 export interface UserQueryForm {
-  _id?: string
+  nickname?: string
   username?: string
   state?: UserState | number // 有一个选项是0代表全部
 }

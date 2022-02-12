@@ -4,13 +4,15 @@ import type { UserListParams, UserQueryForm } from '../../types/userInfo'
 import UserModel from '../../model/Users'
 
 export default async (ctx: ParameterizedContext) => {
-  const { username, state, _id, pageNum, pageSize } = ctx.request
+  const { username, state, nickname, pageNum, pageSize } = ctx.request
     .query as unknown as UserListParams
 
   const { page, skipIndex } = pager({ pageNum, pageSize })
 
+  // todo 模糊搜索
+
   const params = formatParam<UserQueryForm>({
-    _id,
+    nickname,
     state: state != 0 ? state : undefined,
     username
   })
