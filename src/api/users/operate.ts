@@ -25,6 +25,20 @@ export default async (ctx: ParameterizedContext) => {
     if (!username || !deptId || !nickname) {
       return (ctx.body = fail())
     }
+
+    try {
+      await UserModel.findByIdAndUpdate(_id, {
+        mobile,
+        job,
+        state,
+        roleList,
+        deptId
+      })
+      ctx.body = success(null, '更新成功')
+    } catch (e: any) {
+      log.error(e.stack)
+      ctx.body = fail(e.stack)
+    }
   } else {
     const res = await UserModel.findOne(
       { $or: [{ username, nickname }] },
