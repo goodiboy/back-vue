@@ -8,7 +8,7 @@ import { success } from '../../utils/utils'
  @api {get} /common/getCaptcha 获取用户验证码
  @apiVersion 0.1.0
  @apiName 获取验证码
- @apiGroup 通用
+ @apiGroup Common
  @apiSuccessExample {json} 接口返回数据
  {
     "code": 200,

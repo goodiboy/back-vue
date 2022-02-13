@@ -3,6 +3,23 @@ import UserModel from '../../model/Users'
 import { fail, success } from '../../utils/utils'
 import log from '../../lib/log'
 
+/**
+ @api {delete} /users/delete 用户删除
+ @apiVersion 0.1.0
+ @apiGroup Users
+ @apiName 用户删除
+ @apiParam {Array} _ids  需要删除的用户名ID的列表
+
+ @apiParamExample {json} 请求示例
+ {
+    _ids: ["6208b93e323ad3e3e6820919"]
+ }
+ @apiSuccessExample {json} 请求成功数据
+ {
+  "code": 200,
+  "data": "删除成功"
+ }
+ */
 export default async (ctx: ParameterizedContext) => {
   const { _ids } = ctx.request.query
 

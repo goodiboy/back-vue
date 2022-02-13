@@ -8,7 +8,7 @@ import { decryptRsa, handleUserInfo } from './util'
 /**
  @api {post} /login/login 登录
  @apiVersion 0.1.0
- @apiGroup 用户验证
+ @apiGroup Login
  @apiName 登录
  @apiUse loginParams
  @apiBody {String} password rsa加密后的密码

@@ -17,7 +17,7 @@ import send from '../../lib/email'
 /**
  @api {post} /login/reset 重置密码
  @apiVersion 0.1.0
- @apiGroup 用户验证
+ @apiGroup Login
  @apiName 重置密码
  @apiUse loginParams
  @apiParamExample {json} 请求示例
