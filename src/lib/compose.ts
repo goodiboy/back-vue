@@ -24,7 +24,7 @@ const middleware = compose([
   }),
   jwtError,
   jwt({ secret: JWT_SECRET }).unless({
-    path: [/^\/common/, /^\/login/, /^\/users/, /doc/]
+    path: [/^\/common/, /^\/login/, /doc/]
   }),
   router.routes(),
   router.allowedMethods(),
