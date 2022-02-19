@@ -1,5 +1,5 @@
 import type { ParameterizedContext } from 'koa'
-import UserModel from '../../model/Users'
+import UserModel from '../../model/user/Users'
 import { fail, success } from '../../utils/utils'
 import log from '../../lib/log'
 

@@ -2,8 +2,8 @@ import type { ParameterizedContext } from 'koa'
 
 import type { UserInfo } from '../../types/userInfo'
 import { fail, MsgCode, success } from '../../utils/utils'
-import UserModel from '../../model/Users'
-import UsersCount from '../../model/UsersCount'
+import UserModel from '../../model/user/Users'
+import UsersCount from '../../model/user/UsersCount'
 import bcrypt from 'bcrypt'
 import log from '../../lib/log'
 

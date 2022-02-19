@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose'
-import type { UserInfo } from '../types/userInfo'
-import { currentTime } from '../utils/utils'
+import type { UserInfo } from '../../types/userInfo'
+import { currentTime } from '../../utils/utils'
 const schema = new Schema<UserInfo>({
   num: { type: Number, required: true }, // 记录用户是第几位员工
   username: { type: String, required: true, unique: true },

@@ -9,7 +9,7 @@ import {
   success
 } from '../../utils/utils'
 import isEmail from 'validator/lib/isEmail'
-import UserModel from '../../model/Users'
+import UserModel from '../../model/user/Users'
 import { nanoid } from 'nanoid'
 import bcrypt from 'bcrypt'
 import send from '../../lib/email'
