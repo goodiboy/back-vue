@@ -1,6 +1,7 @@
 import logUtil from '../lib/log'
 import redisClient from '../lib/redis-client'
-import { ParameterizedContext } from 'koa'
+import type { ParameterizedContext } from 'koa'
+import type { ResponseType } from '../types/common'
 import dayjs from 'dayjs'
 // 错误码
 export enum MsgCode {
@@ -41,20 +42,13 @@ export const pager = ({ pageNum = 1, pageSize = 10 }): PageType => {
   }
 }
 
-// 返回的数据结构
-export interface ResponseType<T = any> {
-  data: T | null
-  msg: string | null
-  code: MsgCode
-}
-
 /**
  * 请求成功
  * @param data
  * @param msg
  * @param code
  */
-const success = <T = any>(
+export const success = <T = any>(
   data: T,
   msg: string | null = null,
   code = MsgCode.SUCCESS
@@ -73,7 +67,7 @@ const success = <T = any>(
  * @param msg
  * @param code
  */
-const catchError = <T = any>(
+export const catchError = <T = any>(
   msg = '系统出现异常，请稍后重试',
   code = MsgCode.BUSINESS_ERROR,
   data: T | null = null
@@ -92,7 +86,7 @@ const catchError = <T = any>(
  * @param msg
  * @param code
  */
-const fail = <T = any>(
+export const fail = <T = any>(
   msg = '参数错误',
   code = MsgCode.PARAM_ERROR,
   data: T | null = null
@@ -111,7 +105,7 @@ const fail = <T = any>(
  * @param captchaId 验证码id
  * @param ctx koa上下文
  */
-const checkCaptchaValid = async (
+export const checkCaptchaValid = async (
   captcha: string,
   captchaId: string,
   ctx: ParameterizedContext
@@ -128,11 +122,18 @@ const checkCaptchaValid = async (
   return true
 }
 
-const currentTime = () => {
+/**
+ * 获取当前的时间
+ */
+export const currentTime = () => {
   return dayjs().format('YYYY-MM-DD HH:mm:ss')
 }
 
-const formatParam = <T = any>(params: T): T => {
+/**
+ * 格式化参数，把undefined的参数移除
+ * @param params
+ */
+export const formatParam = <T = any>(params: T): T => {
   const res: any = {}
   for (const key in params) {
     if (params[key]) {
@@ -140,13 +141,4 @@ const formatParam = <T = any>(params: T): T => {
     }
   }
   return res
-}
-
-export {
-  success,
-  fail,
-  catchError,
-  checkCaptchaValid,
-  currentTime,
-  formatParam
 }
