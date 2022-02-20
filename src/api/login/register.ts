@@ -67,5 +67,5 @@ export default async (ctx: ParameterizedContext) => {
 
   const account = new UserModel(userInfo)
   const resUser = await account.save() // 添加用户到数据库
-  return (ctx.body = success(handleUserInfo(resUser)))
+  return (ctx.body = success(handleUserInfo(resUser), '注册成功'))
 }

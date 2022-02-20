@@ -8,6 +8,7 @@ const schema = new Schema<Userinfo>({
   nickname: { type: String, required: true, unique: true },
   created: { type: String, default: currentTime() },
   updated: { type: String, default: currentTime() },
+  lastLogin: String,
   mobile: { type: String }, //手机号
   sex: Number, //性别 0:男  1：女
   deptId: Array, //部门

@@ -1,6 +1,12 @@
 import type { ParameterizedContext } from 'koa'
 import type { LoginForm } from '../../types/login'
-import { checkCaptchaValid, fail, MsgCode, success } from '../../utils/utils'
+import {
+  checkCaptchaValid,
+  currentTime,
+  fail,
+  MsgCode,
+  success
+} from '../../utils/utils'
 import UserModel from '../../model/user/Users'
 import bcrypt from 'bcrypt'
 import { decryptRsa, handleUserInfo } from './util'
@@ -35,12 +41,15 @@ export default async (ctx: ParameterizedContext) => {
     return
   }
 
-  const user = await UserModel.findOne({ username })
+  const user = await UserModel.findOneAndUpdate(
+    { username },
+    { lastLogin: currentTime() }
+  )
 
   // 如果用户不存在，或者密码不正确，返回错误信息
   if (!user || !(await bcrypt.compare(decryptPassword, user.password))) {
     return (ctx.body = fail('账号或密码错误', MsgCode.USER_ACCOUNT_ERROR))
   }
 
-  return (ctx.body = success(handleUserInfo(user)))
+  return (ctx.body = success(handleUserInfo(user), '登录成功'))
 }
