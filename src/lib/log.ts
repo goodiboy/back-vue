@@ -26,12 +26,19 @@ log4js.configure({
       filename: 'logs/error', // pattern已经带有log后缀
       pattern: 'yyyy-MM-dd.log',
       alwaysIncludePattern: true // 设置文件名 filename + pattern
+    },
+    debug: {
+      type: 'dateFile', //日期文件
+      filename: 'logs/debug', // pattern已经带有log后缀
+      pattern: 'yyyy-MM-dd.log',
+      alwaysIncludePattern: true // 设置文件名 filename + pattern
     }
   },
   categories: {
     default: { appenders: ['console'], level: Levels.debug }, // 默认
     info: { appenders: ['info', 'console'], level: Levels.info }, // 信息打印
-    error: { appenders: ['error', 'console'], level: Levels.error } // 错误打印
+    error: { appenders: ['error', 'console'], level: Levels.error }, // 错误打印
+    debug: { appenders: ['debug', 'console'], level: Levels.debug } // 调试打印
   }
 })
 

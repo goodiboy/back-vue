@@ -142,3 +142,19 @@ export const formatParam = <T = any>(params: T): T => {
   }
   return res
 }
+
+/**
+ * 检测哪个属性是undefined
+ * @param params
+ */
+export const checkAttr = (params: Record<string, any>) => {
+  console.log(params)
+  const invalid: string[] = []
+
+  for (const attr in params) {
+    if (params[attr] === undefined) {
+      invalid.push(attr)
+    }
+  }
+  return invalid.join(',')
+}

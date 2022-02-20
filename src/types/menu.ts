@@ -1,4 +1,5 @@
 export interface MenuType {
+  _id: string
   menuType: number //菜单类型
   menuName: string //菜单名称
   menuCode: string //权限标识
