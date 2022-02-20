@@ -71,7 +71,7 @@ export default async (ctx: ParameterizedContext) => {
         state,
         roleList,
         deptId,
-        update: currentTime()
+        updated: currentTime()
       })
       ctx.body = success(null, '更新成功')
     } catch (e: any) {

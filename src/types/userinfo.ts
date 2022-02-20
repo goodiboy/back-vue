@@ -23,7 +23,7 @@ export interface Userinfo {
   password: string
   nickname: string
   created: string
-  update: string
+  updated: string
   mobile: string
   sex: Sex
   deptId: string[]

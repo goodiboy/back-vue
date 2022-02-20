@@ -1,6 +1,6 @@
 import type { ParameterizedContext } from 'koa'
 import type { MenuType } from '../../types/menu'
-import { checkAttr, fail, success } from '../../utils/utils'
+import { checkAttr, currentTime, fail, success } from '../../utils/utils'
 import MenuModel from '../../model/menu/Menu'
 import log from '../../lib/log'
 
@@ -18,7 +18,16 @@ export default async (ctx: ParameterizedContext) => {
 
   // _id 存在的时候是编辑操作，不存在是添加操作
   if (_id) {
-    // todo 编辑
+    try {
+      await MenuModel.findByIdAndUpdate(_id, {
+        ...params,
+        updated: currentTime()
+      })
+      ctx.body = success('更新成功')
+    } catch (e: any) {
+      log.error(e.stack)
+      ctx.body = fail(e.stack)
+    }
   } else {
     try {
       const menu = new MenuModel(params)

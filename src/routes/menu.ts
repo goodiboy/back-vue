@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 import list from '../api/menu/list'
 import operate from '../api/menu/operate'
-import del from '../api/users/del'
+import del from '../api/menu/del'
 const router = new Router()
 
 router.prefix('/menu')

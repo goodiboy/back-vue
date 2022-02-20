@@ -9,6 +9,6 @@ export interface MenuType {
   menuState: number //菜单状态
   parentId: string
   parentIds: string[]
-  createTime: string //创建时间
-  updateTime: string //更新时间
+  created: string //创建时间
+  updated: string //更新时间
 }

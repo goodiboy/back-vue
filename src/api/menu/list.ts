@@ -5,6 +5,8 @@ import MenuModel from '../../model/menu/Menu'
 export default async (ctx: ParameterizedContext) => {
   const { menuName, menuState } = ctx.request.query
 
+  // todo 模糊搜索
+
   const params: any = {}
   if (menuName) params.menuName = menuName
   if (menuState) params.menuState = menuState

@@ -12,8 +12,8 @@ const schema = new Schema<MenuType>({
   menuState: Number, //菜单状态
   parentId: Types.ObjectId,
   parentIds: [Types.ObjectId],
-  createTime: { type: String, default: currentTime() }, //创建时间
-  updateTime: { type: String, default: currentTime() } //更新时间
+  created: { type: String, default: currentTime() }, //创建时间
+  updated: { type: String, default: currentTime() } //更新时间
 })
 
 const MenuModel = model('menus', schema)
