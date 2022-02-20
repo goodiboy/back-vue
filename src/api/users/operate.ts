@@ -1,6 +1,6 @@
 import type { ParameterizedContext } from 'koa'
 
-import type { UserInfo } from '../../types/userInfo'
+import type { Userinfo } from '../../types/userinfo'
 import { fail, MsgCode, success } from '../../utils/utils'
 import UserModel from '../../model/user/Users'
 import UsersCount from '../../model/user/UsersCount'
@@ -56,7 +56,7 @@ export default async (ctx: ParameterizedContext) => {
     deptId,
     admin,
     roleList
-  } = ctx.request.body as UserInfo
+  } = ctx.request.body as Userinfo
 
   // 存在id即是修改，不存在为添加
   if (_id) {

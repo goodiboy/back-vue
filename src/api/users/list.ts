@@ -1,6 +1,6 @@
 import type { ParameterizedContext } from 'koa'
 import { fail, formatParam, pager, success } from '../../utils/utils'
-import type { UserListParams, UserQueryForm } from '../../types/userInfo'
+import type { UserListParams, UserQueryForm } from '../../types/userinfo'
 import UserModel from '../../model/user/Users'
 
 /**

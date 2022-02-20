@@ -1,9 +1,9 @@
-import type { UserInfo } from '../../types/userInfo'
+import type { Userinfo } from '../../types/userinfo'
 import jsonwebtoken from 'jsonwebtoken'
 import { JWT_SECRET } from '../../config'
 import { pki } from 'node-forge'
 
-const handleUserInfo = (user: UserInfo) => {
+const handleUserInfo = (user: Userinfo) => {
   // eslint-disable-next-line
   // @ts-ignore
   user.password = undefined // 移除密码

@@ -16,7 +16,7 @@ export enum Sex {
   woman
 }
 
-export interface UserInfo {
+export interface Userinfo {
   _id: string
   num: number
   username: string

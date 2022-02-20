@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
-import type { UserInfo } from '../../types/userInfo'
+import type { Userinfo } from '../../types/userinfo'
 import { currentTime } from '../../utils/utils'
-const schema = new Schema<UserInfo>({
+const schema = new Schema<Userinfo>({
   num: { type: Number, required: true }, // 记录用户是第几位员工
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -21,6 +21,6 @@ const schema = new Schema<UserInfo>({
   remark: String
 })
 
-const UserModel = model<UserInfo>('User', schema, 'users')
+const UserModel = model<Userinfo>('User', schema, 'users')
 
 export default UserModel
