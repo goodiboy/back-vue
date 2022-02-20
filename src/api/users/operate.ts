@@ -1,7 +1,7 @@
 import type { ParameterizedContext } from 'koa'
 
 import type { Userinfo } from '../../types/userinfo'
-import { fail, MsgCode, success } from '../../utils/utils'
+import { currentTime, fail, MsgCode, success } from '../../utils/utils'
 import UserModel from '../../model/user/Users'
 import UsersCount from '../../model/user/UsersCount'
 import bcrypt from 'bcrypt'
@@ -70,7 +70,8 @@ export default async (ctx: ParameterizedContext) => {
         job,
         state,
         roleList,
-        deptId
+        deptId,
+        update: currentTime()
       })
       ctx.body = success(null, '更新成功')
     } catch (e: any) {
