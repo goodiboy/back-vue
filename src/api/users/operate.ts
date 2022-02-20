@@ -7,24 +7,23 @@ import UsersCount from '../../model/user/UsersCount'
 import bcrypt from 'bcrypt'
 import log from '../../lib/log'
 
-export default async (ctx: ParameterizedContext) => {
-  /**
-   @api {post} /users/delete 用户添加和删除
-   @apiVersion 0.1.0
-   @apiGroup Users
-   @apiName 用户添加和删除
-   @apiBody {String} [_id] 用户id，编辑的时候是必须的
-   @apiBody {String} username 用户名
-   @apiBody {String} nickname 昵称
-   @apiBody {String} mobile 手机号
-   @apiBody {Array} deptId 部门id列表
-   @apiBody {String} job 岗位id
-   @apiBody {Number} state 用户状态：1: 在职 2: 离职 3: 试用期
-   @apiBody {Array} roleList 系统角色列表
+/**
+ @api {post} /users/operate 用户添加和编辑
+ @apiVersion 0.1.0
+ @apiGroup Users
+ @apiName 用户添加和删除
+ @apiBody {String} [_id] 用户id，编辑的时候是必须的
+ @apiBody {String} username 用户名
+ @apiBody {String} nickname 昵称
+ @apiBody {String} mobile 手机号
+ @apiBody {Array} deptId 部门id列表
+ @apiBody {String} job 岗位id
+ @apiBody {Number} state 用户状态：1: 在职 2: 离职 3: 试用期
+ @apiBody {Array} roleList 系统角色列表
 
 
-   @apiParamExample {json} 请求示例
-   {
+ @apiParamExample {json} 请求示例
+ {
         "_id": "6208b93e323ad3e3e6820919",
         "username": "admin@qq.com",
         "nickname": "测试用户",
@@ -40,12 +39,13 @@ export default async (ctx: ParameterizedContext) => {
           "60180b07b1eaed6c45fbebdb"
         ],
    }
-   @apiSuccessExample {json} 请求成功数据
-   {
+ @apiSuccessExample {json} 请求成功数据
+ {
     "code": 200,
     "data": "删除成功"
    }
-   */
+ */
+export default async (ctx: ParameterizedContext) => {
   const {
     _id,
     username,
