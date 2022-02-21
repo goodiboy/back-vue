@@ -30,6 +30,9 @@ export default async (ctx: ParameterizedContext) => {
     }
   } else {
     try {
+      if (params.parentId) {
+        params.parentIds.push(params.parentId)
+      }
       const menu = new MenuModel(params)
       await menu.save()
       ctx.body = success(null, '创建成功')

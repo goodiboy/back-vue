@@ -1,5 +1,5 @@
 import type { ParameterizedContext } from 'koa'
-import { success } from '../../utils/utils'
+import { formatTree, success } from '../../utils/utils'
 import MenuModel from '../../model/menu/Menu'
 
 export default async (ctx: ParameterizedContext) => {
@@ -12,5 +12,7 @@ export default async (ctx: ParameterizedContext) => {
   if (menuState) params.menuState = menuState
   const menuList = (await MenuModel.find(params)) || []
 
-  return (ctx.body = success(menuList))
+  const menuTree = formatTree(menuList, '0')
+
+  return (ctx.body = success(menuTree))
 }

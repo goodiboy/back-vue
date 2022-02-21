@@ -11,4 +11,5 @@ export interface MenuType {
   parentIds: string[]
   created: string //创建时间
   updated: string //更新时间
+  children?: MenuType[]
 }

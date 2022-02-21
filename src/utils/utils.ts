@@ -158,3 +158,19 @@ export const checkAttr = (params: Record<string, any>) => {
   }
   return invalid.join(',')
 }
+
+export const formatTree = (
+  root: any[],
+  parentId: string,
+  children = 'children'
+) => {
+  const list = root.filter((item) => {
+    return item.parentId.toString() === parentId.toString()
+  })
+
+  list.forEach((item) => {
+    item[children] = formatTree(root, item._id)
+  })
+
+  return list
+}
