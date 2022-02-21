@@ -159,17 +159,34 @@ export const checkAttr = (params: Record<string, any>) => {
   return invalid.join(',')
 }
 
+/**
+ * 把列表数据格式化成树数据
+ * @param root 需要出来的列表数据
+ * @param parentId 父级id
+ * @param children 子级数组字段名
+ */
 export const formatTree = (
   root: any[],
   parentId: string,
   children = 'children'
 ) => {
-  const list = root.filter((item) => {
-    return item.parentId.toString() === parentId.toString()
+  // const list = root.filter((item) => {
+  //   return item.parentId.toString() === parentId.toString()
+  // })
+
+  const list: any[] = []
+  const newRoot: any[] = []
+  root.forEach((item) => {
+    if (item.parentId.toString() === parentId.toString()) {
+      list.push(item)
+    } else {
+      newRoot.push(item)
+    }
   })
 
   list.forEach((item) => {
-    item[children] = formatTree(root, item._id)
+    // item[children] = formatTree(root, item._id)
+    item[children] = formatTree(newRoot, item._id)
   })
 
   return list
