@@ -12,7 +12,6 @@ export default async (ctx: ParameterizedContext) => {
   if (menuState) params.menuState = menuState
   const menuList = (await MenuModel.find(params)) || []
 
-  const menuTree = formatTree(menuList, '0')
-
+  const menuTree = formatTree(menuList, null)
   return (ctx.body = success(menuTree))
 }

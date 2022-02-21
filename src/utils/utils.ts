@@ -3,6 +3,7 @@ import redisClient from '../lib/redis-client'
 import type { ParameterizedContext } from 'koa'
 import type { ResponseType } from '../types/common'
 import dayjs from 'dayjs'
+import { Types } from 'mongoose'
 // 错误码
 export enum MsgCode {
   SUCCESS = 200,
@@ -167,17 +168,14 @@ export const checkAttr = (params: Record<string, any>) => {
  */
 export const formatTree = (
   root: any[],
-  parentId: string,
+  parentId: Types.ObjectId | null,
   children = 'children'
 ) => {
-  // const list = root.filter((item) => {
-  //   return item.parentId.toString() === parentId.toString()
-  // })
-
   const list: any[] = []
   const newRoot: any[] = []
   root.forEach((item) => {
-    if (item.parentId.toString() === parentId.toString()) {
+    // prettier-ignore
+    if (item.parentId?.[item.parentId.length - 1].toString() === parentId?.toString()) {
       list.push(item)
     } else {
       newRoot.push(item)
@@ -185,7 +183,6 @@ export const formatTree = (
   })
 
   list.forEach((item) => {
-    // item[children] = formatTree(root, item._id)
     item[children] = formatTree(newRoot, item._id)
   })
 

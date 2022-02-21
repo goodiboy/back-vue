@@ -26,7 +26,10 @@ export default async (ctx: ParameterizedContext) => {
     return (ctx.body = fail('缺少参数_id'))
   }
   try {
-    const res = await MenuModel.findByIdAndRemove(_id)
+    const res = await MenuModel.findByIdAndDelete(_id)
+    await MenuModel.deleteMany({
+      parentId: { $all: [_id] }
+    })
     if (res) {
       return (ctx.body = success(null, '删除成功'))
     }

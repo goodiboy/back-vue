@@ -1,3 +1,5 @@
+import { Types } from 'mongoose'
+
 export interface MenuType {
   _id: string
   menuType: number //菜单类型
@@ -7,8 +9,7 @@ export interface MenuType {
   icon: string //图标
   component: string //组件地址
   menuState: number //菜单状态
-  parentId: string
-  parentIds: string[]
+  parentId: Types.ObjectId[] | null
   created: string //创建时间
   updated: string //更新时间
   children?: MenuType[]
