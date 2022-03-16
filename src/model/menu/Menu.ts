@@ -3,7 +3,6 @@ import { MenuType } from '../../types/menu'
 import { currentTime } from '../../utils/utils'
 
 const schema = new Schema<MenuType>({
-  menuType: Number, //菜单类型
   menuName: String, //菜单名称
   menuCode: String, //权限标识
   path: String, //路由地址
